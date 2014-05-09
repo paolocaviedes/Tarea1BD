@@ -28,6 +28,7 @@
     </body>
 </html>
 <%
+    try{
        String rutcliente = request.getParameter("rut");
        out.print("<p>"+rutcliente+"</p>");
        
@@ -40,21 +41,28 @@
        Statement stm = conn.createStatement();
                     
 
-       String sql1 = "select ID_VENTA, ID_PRODUCTO, CANTIDAD  from BD.VENTA inner join BD.DETALLE_VENTA on BD.VENTA.ID_VENTA = BD.DETALLE_VENTA.ID_VENTA where BD.VENTA.ID_CLIENTE='"+rutcliente+"'";
-       
-       
-       
+       String sql1 = "select * from BD.VENTA inner join BD.DETALLE_VENTA on BD.VENTA.ID_VENTA = BD.DETALLE_VENTA.ID_VENTA where BD.VENTA.ID_CLIENTE='"+rutcliente+"'";
+            
        ResultSet datosventa = stm.executeQuery(sql1);
-       
+
        while (datosventa.next()){
            int IDVEN = datosventa.getInt("ID_VENTA");
            int IDPRO = datosventa.getInt("ID_PRODUCTO");
            int CANTI = datosventa.getInt("CANTIDAD"); 
 
-            out.print(IDVEN);
-            out.print(IDPRO);
+            out.print(IDVEN+"-");
+            out.print(IDPRO+"-");
             out.print(CANTI);
+            out.println();           
                     }
+       
+            } catch (SQLException error2) {
+                out.println("Error SQL" + error2.getMessage());
+            } catch (Exception error3) {
+                out.println("Se ha producido una excepción try " + error3.getMessage());
+            } 
+
+       
   /*     
        datosventa.next();
        
@@ -82,9 +90,7 @@
         
 //        %> 
 
-<script languaje="JavaScript"> 
-    location.href='Ver_ventas_a_clientes_adm.jsp'; 
-</script>
+
 
 
          <%      
@@ -102,6 +108,6 @@
        sesion.setAttribute("nombre",usuario);
        out.print("<p>"+usuario+", Administrador</p>");
       
-        
+  
 
 %>

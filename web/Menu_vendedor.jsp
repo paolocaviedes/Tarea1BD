@@ -105,7 +105,7 @@ background-image: url(fondo17.jpg);
         
     </div>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Menu Administrador</title>
+        <title>Menu Vendedor</title>
         
     </head>
     <body>

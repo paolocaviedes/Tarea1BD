@@ -5,6 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@page import="javax.swing.JOptionPane"%>
+<!-- Los import -->
+<%@ page language="java" import="java.sql.*"
+         import = "java.sql.Connection"
+         import = "java.sql.DriverManager"
+         import = "java.sql.ResultSet"
+         import = "oracle.jdbc.driver.*" 
+         import = "java.sql.Statement"
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,15 +25,59 @@
         <h1>Mis Ventas</h1>
     </body>
 </html>
+
 <%
-        
-       //String usuario = (String)Session.getAttribute("nombre");
+   try{
        HttpSession sesion=request.getSession();
        String usuario = (String)sesion.getAttribute("nombre");
 
        sesion.setAttribute("nombre",usuario);
-       out.print("<p>"+usuario+", Vendedor</p>");
+       
       
-        
+       String driver = "oracle.jdbc.OracleDriver";
+       String url = "jdbc:oracle:thin:@localhost:1521:XE";
+       String username = "system";
+       String password = "bd";
+       Class.forName(driver);
+       Connection conn = DriverManager.getConnection(url,username,password);
+       Statement stm = conn.createStatement();
+                    
+       String rutv = "";
+       String sql1 = "select RUT from BD.USUARIO where bd.usuario.nombre='"+usuario+"'";
+            
+       ResultSet datosventa = stm.executeQuery(sql1);
+       
+       while (datosventa.next()){
+            rutv = datosventa.getString("rut");
 
+            out.print(rutv);
+            out.println();           
+       }
+       
+       
+       String sql2 = "select * from BD.VENTA where id_usuario = '"+rutv+"'";
+       
+       ResultSet ventas = stm.executeQuery(sql2);
+       
+       
+              while (ventas.next()){
+                  
+           int IDVEN = ventas.getInt("ID_VENTA");
+           int MONTO = ventas.getInt("MONTO_TOTAL");
+ 
+            out.print(IDVEN+"-");
+            out.print(MONTO);
+            out.println();          
+       }
+       
+       
+       
+              out.print("<p>"+usuario+", Vendedor</p>");
+       
+            } catch (SQLException error2) {
+                out.println("Error SQL" + error2.getMessage());
+            } catch (Exception error3) {
+                out.println("Se ha producido una excepción try " + error3.getMessage());
+            } 
+    
 %>
