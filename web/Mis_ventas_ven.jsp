@@ -26,6 +26,18 @@
     </body>
 </html>
 
+<style type="text/css"> 
+table, th, td {
+
+border:1px solid black;
+border-collapse:collapse;
+}
+th,td
+{
+padding:5px;
+} 
+</style> 
+
 <%
    try{
        HttpSession sesion=request.getSession();
@@ -53,6 +65,8 @@
             out.print(rutv);
             out.println();           
        }
+       out.print("<br/>");
+       out.print("<br/>");
        
        
        String sql2 = "select * from BD.VENTA where id_usuario = '"+rutv+"'";

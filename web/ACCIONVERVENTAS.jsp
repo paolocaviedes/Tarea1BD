@@ -17,6 +17,18 @@
          import = "java.sql.Statement"
 %>
 
+
+<style type="text/css"> 
+table, th, td {
+
+border:1px solid black;
+border-collapse:collapse;
+}
+th,td
+{
+padding:5px;
+} 
+</style> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -45,16 +57,24 @@
             
        ResultSet datosventa = stm.executeQuery(sql1);
 
+       out.print("<table>");
+       out.print("<tr>"
+               + "<th>ID VENTA</td>"
+               + "<th>ID PRODUCTO</td>"
+               + "<th>CANTIDAD</td>"
+               + "</tr>");
        while (datosventa.next()){
            int IDVEN = datosventa.getInt("ID_VENTA");
            int IDPRO = datosventa.getInt("ID_PRODUCTO");
            int CANTI = datosventa.getInt("CANTIDAD"); 
-
-            out.print(IDVEN+"-");
-            out.print(IDPRO+"-");
-            out.print(CANTI);
-            out.println();           
+            
+            out.print("<tr>");
+            out.print("<td>"+IDVEN+"</td>");
+            out.print("<td>"+IDPRO+"</td>");
+            out.print("<td>"+CANTI+"</td>");
+            out.print("</tr>");
                     }
+       out.print("</table>");
        
             } catch (SQLException error2) {
                 out.println("Error SQL" + error2.getMessage());
