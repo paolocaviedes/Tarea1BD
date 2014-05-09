@@ -69,19 +69,32 @@ padding:5px;
        out.print("<br/>");
        
        
-       String sql2 = "select * from BD.VENTA where id_usuario = '"+rutv+"'";
+       String sql2 = "select * from BD.VENTA inner join BD.DETALLE_VENTA on VENTA.ID_VENTA = DETALLE_VENTA.ID_VENTA inner join BD.PRODUCTO on DETALLE_VENTA.ID_PRODUCTO = PRODUCTO.ID_PRODUCTO where id_usuario = '"+rutv+"'";
+       
        
        ResultSet ventas = stm.executeQuery(sql2);
        
+              out.print("<table>");
+       out.print("<tr>"
+               + "<th>ID VENTA</td>"
+               + "<th>NOMBRE</td>"
+               + "<th>CLIENTE</td>"
+               + "<th>CANTIDAD</td>"
+               + "</tr>");
        
               while (ventas.next()){
                   
            int IDVEN = ventas.getInt("ID_VENTA");
-           int MONTO = ventas.getInt("MONTO_TOTAL");
+           String NOMBRE = ventas.getString("NOMBRE");
+           String CLIENTE = ventas.getString("ID_CLIENTE");
+           int CANTI = ventas.getInt("CANTIDAD");
  
-            out.print(IDVEN+"-");
-            out.print(MONTO);
-            out.println();          
+            out.print("<tr>");
+            out.print("<td>"+IDVEN+"</td>");
+            out.print("<td>"+NOMBRE+"</td>");
+            out.print("<td>"+CLIENTE+"</td>");
+            out.print("<td>"+CANTI+"</td>");
+            out.print("<tr>");
        }
        
        

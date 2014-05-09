@@ -53,24 +53,24 @@ padding:5px;
        Statement stm = conn.createStatement();
                     
 
-       String sql1 = "select * from BD.VENTA inner join BD.DETALLE_VENTA on BD.VENTA.ID_VENTA = BD.DETALLE_VENTA.ID_VENTA where BD.VENTA.ID_CLIENTE='"+rutcliente+"'";
-            
+       String sql1 = "select * from BD.VENTA inner join BD.DETALLE_VENTA on VENTA.ID_VENTA = DETALLE_VENTA.ID_VENTA inner join BD.PRODUCTO on DETALLE_VENTA.ID_PRODUCTO = PRODUCTO.ID_PRODUCTO where id_cliente ='"+rutcliente+"'";
+           
        ResultSet datosventa = stm.executeQuery(sql1);
 
        out.print("<table>");
        out.print("<tr>"
                + "<th>ID VENTA</td>"
-               + "<th>ID PRODUCTO</td>"
+               + "<th>NOMBRE</td>"
                + "<th>CANTIDAD</td>"
                + "</tr>");
        while (datosventa.next()){
            int IDVEN = datosventa.getInt("ID_VENTA");
-           int IDPRO = datosventa.getInt("ID_PRODUCTO");
+           String NOMBRE = datosventa.getString("NOMBRE");
            int CANTI = datosventa.getInt("CANTIDAD"); 
             
             out.print("<tr>");
             out.print("<td>"+IDVEN+"</td>");
-            out.print("<td>"+IDPRO+"</td>");
+            out.print("<td>"+NOMBRE+"</td>");
             out.print("<td>"+CANTI+"</td>");
             out.print("</tr>");
                     }
