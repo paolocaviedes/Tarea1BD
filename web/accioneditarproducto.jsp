@@ -42,7 +42,7 @@
             String sql1 = "update bd.producto set categoria ='"+cat+"' where nombre='"+nombre+"'";
             String sql2 = "update bd.producto set precio ='"+price+"' where nombre='"+nombre+"'";
             String driver = "oracle.jdbc.OracleDriver";
-            String url = "jdbc:oracle:thin:@Paolo-PB:1521:XE";
+            String url = "jdbc:oracle:thin:@localhost:1521:XE";
             String username = "system";
             String password = "bd";
             Class.forName(driver);
@@ -58,7 +58,7 @@
       %>
          <script language="JavaScript">
           alert("Producto editado con exito");
-          location.href="Menu_admministrador.jsp";
+          location.href="Menu_administrador.jsp";
          </script>
       <%
       }

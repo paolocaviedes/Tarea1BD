@@ -11,7 +11,7 @@
 <%
                        
 	String driver = "oracle.jdbc.OracleDriver";
-	String url = "jdbc:oracle:thin:@Paolo-PB:1521:XE";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String login = "system";
 	String password = "bd";
 	String user = request.getParameter("l_nombre");

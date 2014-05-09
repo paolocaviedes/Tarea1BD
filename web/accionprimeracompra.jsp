@@ -37,7 +37,7 @@
       sesion.setAttribute("totalparcial",totalp);
       
             String driver = "oracle.jdbc.OracleDriver";
-            String url = "jdbc:oracle:thin:@Paolo-PB:1521:XE";
+            String url = "jdbc:oracle:thin:@localhost:1521:XE";
             String username = "system";
             String password = "bd";
             Class.forName(driver);
